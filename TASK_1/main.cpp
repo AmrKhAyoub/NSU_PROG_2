@@ -32,7 +32,37 @@ class Matrix {
             }
             size = 0;
         }
+    
+    public:
+        // 1. Default Constructor
+        Matrix() : size(0), data(nullptr) {}
 
+        // 2. Identity Matrix Constructor
+        Matrix(int n) {
+            allocateMemory(n);
+            for (int i = 0; i < size; ++i) {
+                for (int j = 0; j < size; ++j) {
+                    if (i == j) data[i][j] = 1;
+                    else data[i][j] = 0;
+                }
+            }
+        }
+
+        // 3. Diagonal Matrix Constructor
+        Matrix(int n, int* diag_elements) {
+            allocateMemory(n);
+            for (int i = 0; i < size; ++i) {
+                for (int j = 0; j < size; ++j) {
+                    if (i == j) data[i][j] = diag_elements[i];
+                    else data[i][j] = 0;
+                }
+            }
+        }
+
+        // 4. Destructor
+        ~Matrix() {
+            freeMemory();
+        }
 };
 
 int main(){
