@@ -1,0 +1,44 @@
+# ===============================
+# C++ Output & Build Files
+# ===============================
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+*.app
+
+# Build Directories
+build/
+bin/
+out/
+cmake-build-debug/
+cmake-build-release/
+
+# ===============================
+# Python Artifacts & Virtual Envs
+# ===============================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+venv/
+.venv/
+env/
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ===============================
+# IDEs & System Files
+# ===============================
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
