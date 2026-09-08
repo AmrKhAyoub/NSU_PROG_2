@@ -63,6 +63,30 @@ class Matrix {
         ~Matrix() {
             freeMemory();
         }
+
+        // Copy Constructor
+        Matrix(const Matrix& other) {
+            allocateMemory(other.size);
+            for (int i = 0; i < size; ++i) {
+                for (int j = 0; j < size; ++j) {
+                    data[i][j] = other.data[i][j];
+                }
+            }
+        }
+
+        // Assignment Operator
+        Matrix& operator=(const Matrix& other) {
+            if (this != &other) { // Prevent self-assignment
+                freeMemory();
+                allocateMemory(other.size);
+                for (int i = 0; i < size; ++i) {
+                    for (int j = 0; j < size; ++j) {
+                        data[i][j] = other.data[i][j];
+                    }
+                }
+            }
+            return *this;
+        }
 };
 
 int main(){
