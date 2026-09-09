@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-
+#include <cstdlib> // For exit(1)
 using namespace std;
 
 class Matrix {
@@ -32,7 +32,11 @@ class Matrix {
             }
             size = 0;
         }
-    
+        
+        // Helper function to check if dimensions match
+        bool hasSameSize(const Matrix& other) const {
+            return this->size == other.size;
+        }
     public:
         // 1. Default Constructor
         Matrix() : size(0), data(nullptr) {}
@@ -75,7 +79,7 @@ class Matrix {
         }
 
         // Assignment Operator
-        Matrix& operator=(const Matrix& other) {
+        Matrix& operator = (const Matrix& other) {
             if (this != &other) { // Prevent self-assignment
                 freeMemory();
                 allocateMemory(other.size);
@@ -87,6 +91,66 @@ class Matrix {
             }
             return *this;
         }
+
+        // ======== OPERATIONS ==============
+
+        // Addition Operator
+        Matrix operator + (const Matrix& other) const {
+            if (!hasSameSize(other)) {
+                cout << "ERROR: Matrix dimensions do not match for addition!\n";
+                exit(1);
+            }
+
+            Matrix result;
+            result.allocateMemory(this->size);
+
+            for (int i = 0; i < size; ++i) {
+                for (int j = 0; j < size; ++j) {
+                    result.data[i][j] = this->data[i][j] + other.data[i][j];
+                }
+            }
+            return result;
+        }
+
+        // Subtraction Operator
+        Matrix operator - (const Matrix& other) const {
+            if (!hasSameSize(other)) {
+                cout << "ERROR: Matrix dimensions do not match for subtraction!\n";
+                exit(1);
+            }
+
+            Matrix result;
+            result.allocateMemory(this->size);
+
+            for (int i = 0; i < size; ++i) {
+                for (int j = 0; j < size; ++j) {
+                    result.data[i][j] = this->data[i][j] - other.data[i][j];
+                }
+            }
+            return result;
+        }
+
+        // Multiplication Operator
+        Matrix operator*(const Matrix& other) const {
+            if (!hasSameSize(other)) {
+                cout << "ERROR: Matrix dimensions do not match for multiplication!\n";
+                exit(1);
+            }
+
+            Matrix result;
+            result.allocateMemory(this->size);
+
+            for (int i = 0; i < size; ++i) {
+                for (int j = 0; j < size; ++j) {
+                    result.data[i][j] = 0; // Initialize element to mske it zero
+                    for (int k = 0; k < size; ++k) {
+                        result.data[i][j] += this->data[i][k] * other.data[k][j];
+                    }
+                }
+            }
+            return result;
+        }
+
 };
 
 int main(){
