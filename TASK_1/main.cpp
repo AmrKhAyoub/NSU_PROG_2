@@ -131,7 +131,7 @@ class Matrix {
         }
 
         // Multiplication Operator
-        Matrix operator*(const Matrix& other) const {
+        Matrix operator * (const Matrix& other) const {
             if (!hasSameSize(other)) {
                 cout << "ERROR: Matrix dimensions do not match for multiplication!\n";
                 exit(1);
@@ -152,7 +152,7 @@ class Matrix {
         }
 
         // Equality Operator
-        bool operator==(const Matrix& other) const {
+        bool operator == (const Matrix& other) const {
             if (!hasSameSize(other)) return false;
             
             for (int i = 0; i < size; ++i) {
@@ -164,10 +164,21 @@ class Matrix {
         }
 
         // Inequality Operator
-        bool operator!=(const Matrix& other) const {
+        bool operator != (const Matrix& other) const {
             return !(*this == other);
         }
 
+        // Transpose Operator
+        Matrix operator ~ () const {
+            Matrix result;
+            result.allocateMemory(this->size);
+            for (int i = 0; i < size; ++i) {
+                for (int j = 0; j < size; ++j) {
+                    result.data[i][j] = this->data[j][i];
+                }
+            }
+            return result;
+        }
 };
 
 int main(){
