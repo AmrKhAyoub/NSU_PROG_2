@@ -151,6 +151,23 @@ class Matrix {
             return result;
         }
 
+        // Equality Operator
+        bool operator==(const Matrix& other) const {
+            if (!hasSameSize(other)) return false;
+            
+            for (int i = 0; i < size; ++i) {
+                for (int j = 0; j < size; ++j) {
+                    if (this->data[i][j] != other.data[i][j]) return false;
+                }
+            }
+            return true;
+        }
+
+        // Inequality Operator
+        bool operator!=(const Matrix& other) const {
+            return !(*this == other);
+        }
+
 };
 
 int main(){
