@@ -92,6 +92,25 @@ class Matrix {
             return *this;
         }
 
+        // Read matrix elements from input stream whether its from file or terminal
+        void read(istream& in) {
+            for (int i = 0; i < size; ++i) {
+                for (int j = 0; j < size; ++j) {
+                    in >> data[i][j];
+                }
+            }
+        }
+
+        // Print matrix elements to output stream whether its to file or terminal
+        void print(ostream& out) const {
+            for (int i = 0; i < size; ++i) {
+                for (int j = 0; j < size; ++j) {
+                    out << data[i][j] << (j == size - 1 ? "" : " ");
+                }
+                out << "\n";
+            }
+        }
+
         // ======== OPERATIONS ==============
 
         // Addition Operator
