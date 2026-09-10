@@ -198,7 +198,34 @@ class Matrix {
             }
             return result;
         }
-};
+
+        // Operator () to extract a minor matrix
+        Matrix operator()(int row_to_remove, int col_to_remove) const {
+            if (size <= 1) {
+                cout << "ERROR: Cannot create a minor from a matrix of size 1 or 0!\n";
+                exit(1);
+            }
+
+            Matrix result;
+            result.allocateMemory(this->size - 1); // Size = N - 1
+            
+            int row = 0; // Pointer for result row
+            for (int i = 0; i < size; ++i) {
+                if (i == row_to_remove) continue; // Skip the specified row
+                
+                int col = 0; // Pointer for result column
+                for (int j = 0; j < size; ++j) {
+                    if (j == col_to_remove) continue; // Skip the specified column
+                    
+                    result.data[row][col] = this->data[i][j];
+                    col++;
+                }
+                row++;
+            }
+            return result;
+        }
+
+    };
 
 int main(){
 
